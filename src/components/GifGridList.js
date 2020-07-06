@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Grid,
     makeStyles,
@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 450,
-        margin: '20px'
+        margin: '20px',
     },
     media: {
         height: '500px',
@@ -43,14 +43,16 @@ const useStyles = makeStyles((theme) => ({
         margin: '10px',
         animation: 'animate__animated animate__bounce'
     },
-    '&:hover': {
-        background: '#000',
+    space: {
+        marginRight: '10px',
     }
 }));
 
 const GifGridList = ({ id, image, title }) => {
 
     const classes = useStyles();
+    const [likes, setLikes] = useState(0);
+    const [disLike, setdisLike] = useState(0);
 
     return (
         <Grid item xs={12} sm={6} md={4} xl={3} key={id}>
@@ -69,11 +71,11 @@ const GifGridList = ({ id, image, title }) => {
                 </CardContent>
 
                 <CardActions disableSpacing>
-                    <Button variant="contained" fullWidth className={classes.btn}>
-                        <ThumbUpAltIcon />
+                    <Button variant="contained" fullWidth className={classes.btn} onClick={ () => setLikes(likes + 1) }>
+                        <ThumbUpAltIcon className={ classes.space }/>  { likes }
                     </Button>
-                    <Button variant="contained" fullWidth className={classes.btn}>
-                        <ThumbDownIcon />
+                    <Button variant="contained" fullWidth className={classes.btn} onClick={ () => setdisLike(disLike + 1) }>
+                        <ThumbDownIcon className={ classes.space }/> { disLike }
                     </Button>
                 </CardActions>
 
